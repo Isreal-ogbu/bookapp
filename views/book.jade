@@ -1,0 +1,25 @@
+block content
+    h1 Welcome to my application
+    p welcome to the #{title} page.
+    p #{message}
+    form(action="", method='POST')
+        fieldset 
+            legend Add a book 
+            div 
+                label Title *
+                    br
+                    input(type="text", name='book_title', required)
+            div
+                label Author *
+                    br
+                    input(type="text", name='author', required)
+            div 
+                label ISBN **
+                    br
+                    input(type="text", name="book_isbn", pattern='(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])')
+
+            br
+            div 
+                button save
+                span 
+                button cancel
