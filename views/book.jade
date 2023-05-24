@@ -23,3 +23,16 @@ block content
                 button save
                 span 
                 button cancel
+    table 
+        thead 
+            tr 
+                th Title 
+                th Author 
+                th ISBN
+        tbody 
+            if books 
+                for book in books 
+                    tr 
+                        th book.book_title 
+                        th book.author 
+                        th book.book_isbn

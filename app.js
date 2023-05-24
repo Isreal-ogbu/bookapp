@@ -44,7 +44,7 @@ var faviconPath = path.join(__dirname, 'public', 'favicon.ico');
 app.use(favicon(faviconPath));
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOveride('_method'));
 // Stylus middleware for taking care of css configuration and writing
 var stylus = require("stylus");
