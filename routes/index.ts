@@ -1,3 +1,5 @@
-export function index(arg0: string, index: any) {
-    throw new Error('Function not implemented.');
+import express = require("express")
+
+export function index(request: express.request, response: express.response) {
+    response.send("Welcome to Book studio")
 }

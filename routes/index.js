@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.index = void 0;
-function index(arg0, index) {
-    throw new Error('Function not implemented.');
+function index(request, response) {
+    response.send("Welcome to Book studio");
 }
 exports.index = index;

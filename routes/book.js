@@ -56,7 +56,7 @@ function book(request, response) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, bookmodel.find({ "_id": "646d04855b6fda08eda686d7" })];
+                    return [4 /*yield*/, bookmodel.find({})];
                 case 1:
                     book = _a.sent();
                     response.render('book', {
