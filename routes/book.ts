@@ -51,7 +51,7 @@ export async function findBook(request: express.request, response: express.respo
         console.log(res)
         response.render('book', {
             title: 'books',
-            "books": res
+            "aBook": res
         })
     })
     .catch ((err) => {

@@ -106,7 +106,7 @@ function findBook(request, response) {
                         console.log(res);
                         response.render('book', {
                             title: 'books',
-                            "books": res
+                            "aBook": res
                         });
                     })
                         .catch(function (err) {

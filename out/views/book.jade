@@ -34,7 +34,12 @@ block content
             if books 
                 each book in books 
                     tr
-                        td= book.id
+                        td= book._id
                         td= book.title 
                         td= book.author 
                         td= book.isbn
+            else if aBook 
+                tr 
+                    td= aBook.title 
+                    td= aBook.author 
+                    td= aBook.isbn
