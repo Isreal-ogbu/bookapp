@@ -25,14 +25,16 @@ block content
                 button cancel
     table 
         thead 
-            tr 
+            tr
+                th BookId
                 th Title 
                 th Author 
                 th ISBN
         tbody 
             if books 
                 each book in books 
-                    tr 
-                        td= book.book_title 
+                    tr
+                        td= book.id
+                        td= book.title 
                         td= book.author 
-                        td= book.book_isbn
+                        td= book.isbn

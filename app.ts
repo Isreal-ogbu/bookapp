@@ -31,7 +31,6 @@
 
 import express = require('express')
 import routes = require('./routes/index')
-import user = require('./routes/user')
 import book = require('./routes/book')
 import http = require('http')
 import path = require('path')
@@ -65,8 +64,8 @@ if ('development' == app.get("env")){
 
 // Routes
 app.get('/', routes.index)
-app.get('/users', user.list)
-app.get('/book', book.book)
+app.get('/book/:bookId', book.findBook)
+app.get('/book', book.books)
 app.post('/book', book.submit)
 
 // run the server

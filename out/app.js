@@ -27,7 +27,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // })
 var express = require("express");
 var routes = require("./routes/index");
-var user = require("./routes/user");
 var book = require("./routes/book");
 var http = require("http");
 var path = require("path");
@@ -56,8 +55,8 @@ if ('development' == app.get("env")) {
 }
 // Routes
 app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/book', book.book);
+app.get('/book/:bookId', book.findBook);
+app.get('/book', book.books);
 app.post('/book', book.submit);
 // run the server
 http.createServer(app).listen(app.get('port'), function () {

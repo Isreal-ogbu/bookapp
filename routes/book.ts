@@ -14,11 +14,10 @@ var bookschema = new mongoose.Schema({
 
 var bookmodel = mongoose.model<any>('book', bookschema)
 
-export async function book(request: express.request, response: express.response){
+export async function books(request: express.request, response: express.response){
     try {
         var book = await bookmodel.find({})
         .then((res)=> {
-            console.log(res)
             response.render('book', {
                 title: 'books',
                 'books': res
@@ -29,7 +28,7 @@ export async function book(request: express.request, response: express.response)
     }   
 }
 
-export function submit(request: express.request, response: express.response){
+export async function submit(request: express.request, response: express.response){
     var addedbook = new bookmodel({
         title: request.body.book_title,
         author: request.body.author,
@@ -41,6 +40,21 @@ export function submit(request: express.request, response: express.response){
         response.redirect('/book')
     })
     .catch((err)=>{
+        return next(err)
+    })
+}
+
+
+export async function findBook(request: express.request, response: express.response){
+    const findaBook = await bookmodel.findById(request.params.bookId)
+    .then((res)=> {
+        console.log(res)
+        response.render('book', {
+            title: 'books',
+            "books": res
+        })
+    })
+    .catch ((err) => {
         return next(err)
     })
 }
