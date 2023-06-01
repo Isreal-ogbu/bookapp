@@ -16,9 +16,13 @@ var bookmodel = mongoose.model<any>('book', bookschema)
 
 export async function book(request: express.request, response: express.response){
     try {
-        var book = await bookmodel.findById<any>({id: 1});
-        response.render('book', {
-            title: 'books',
+        var book = await bookmodel.find({})
+        .then((res)=> {
+            console.log(res)
+            response.render('book', {
+                title: 'books',
+                'books': res
+            })
         })
     } catch(err){
         return next(err)
