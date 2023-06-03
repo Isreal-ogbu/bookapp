@@ -27,16 +27,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // })
 var express = require("express");
 var routes = require("./routes/index");
-var user = require("./out/routes/user");
-var book = require("./out/routes/book");
+var book = require("./routes/book");
 var http = require("http");
 var path = require("path");
 var favicon = require("serve-favicon");
 var morgan = require("morgan");
 var methodOveride = require("method-override");
 var errorhandler = require("errorhandler");
-
-
 // const jade = require('jade')
 var app = express();
 app.set('port', process.env.PORT || 3000);
@@ -56,15 +53,11 @@ app.use(express.static(path.join(__dirname, "public")));
 if ('development' == app.get("env")) {
     app.use(errorhandler());
 }
-
-
 // Routes
 app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/book', book.book);
-app.post('/book', book.submit);
-
-
+app.get('/b/:bkid', book.findBook);
+app.get('/b', book.books);
+app.post('/b', book.submit);
 // run the server
 http.createServer(app).listen(app.get('port'), function () {
     console.log('app running on: 127.0.0.1:' + app.get('port'));

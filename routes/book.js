@@ -36,32 +36,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.submit = exports.book = void 0;
+exports.findBook = exports.submit = exports.books = void 0;
 var mongoose = require("mongoose");
 function next(err) {
     console.log(err);
 }
 ;
-mongoose.connect("mongodb://localhost:27017/books");
+mongoose.connect("mongodb+srv://datavisualizationdashboard:OJRiXr5oNR5aDd7d@cluster0.94udpwe.mongodb.net/?retryWrites=true&w=majority");
 var bookschema = new mongoose.Schema({
     title: String,
     author: String,
     isbn: String
 });
 var bookmodel = mongoose.model('book', bookschema);
-function book(request, response) {
+function books(request, response) {
     return __awaiter(this, void 0, void 0, function () {
         var book, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, bookmodel.find({})];
+                    return [4 /*yield*/, bookmodel.find({})
+                            .then(function (res) {
+                            response.render('book', {
+                                title: 'books',
+                                'books': res
+                            });
+                        })];
                 case 1:
                     book = _a.sent();
-                    response.render('book', {
-                        title: 'books',
-                    });
                     return [3 /*break*/, 3];
                 case 2:
                     err_1 = _a.sent();
@@ -71,19 +74,49 @@ function book(request, response) {
         });
     });
 }
-exports.book = book;
+exports.books = books;
 function submit(request, response) {
-    var addedbook = new bookmodel({
-        title: request.body.book_title,
-        author: request.body.author,
-        isbn: request.body.book_isbn
-    });
-    addedbook.save()
-        .then(function (data) {
-        response.redirect('/book');
-    })
-        .catch(function (err) {
-        return next(err);
+    return __awaiter(this, void 0, void 0, function () {
+        var addedbook;
+        return __generator(this, function (_a) {
+            addedbook = new bookmodel({
+                title: request.body.book_title,
+                author: request.body.author,
+                isbn: request.body.book_isbn
+            });
+            addedbook.save()
+                .then(function (data) {
+                response.redirect('/book');
+            })
+                .catch(function (err) {
+                return next(err);
+            });
+            return [2 /*return*/];
+        });
     });
 }
 exports.submit = submit;
+function findBook(request, response) {
+    return __awaiter(this, void 0, void 0, function () {
+        var findaBook;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, bookmodel.findById(request.params.bookId)
+                        .then(function (res) {
+                        console.log(res);
+                        response.render('book', {
+                            title: 'books',
+                            "aBook": res
+                        });
+                    })
+                        .catch(function (err) {
+                        return next(err);
+                    })];
+                case 1:
+                    findaBook = _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.findBook = findBook;

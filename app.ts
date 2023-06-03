@@ -64,9 +64,9 @@ if ('development' == app.get("env")){
 
 // Routes
 app.get('/', routes.index)
-app.get('/book/:bookId', book.findBook)
-app.get('/book', book.books)
-app.post('/book', book.submit)
+app.get('/b/:bkid', book.findBook)
+app.get('/b', book.books)
+app.post('/b', book.submit)
 
 // run the server
 http.createServer(app).listen(app.get('port'), ()=>{
